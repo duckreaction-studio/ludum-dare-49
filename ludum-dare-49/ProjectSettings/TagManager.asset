@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - Spawn
+  - End
+  - StartPoint
   layers:
   - Default
   - TransparentFX
