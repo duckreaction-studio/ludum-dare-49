@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace Puzzle
@@ -14,8 +15,24 @@ namespace Puzzle
 
         int _currentDirection = 1;
         int _currentStep = 0;
+        Vector3 _previousPosition;
 
         protected override void DoAction()
+        {
+            StartTranslation();
+        }
+
+        private void IncreaseStepAndChangeDirection()
+        {
+            _currentStep++;
+            if (_currentStep >= _maxStep)
+            {
+                _currentDirection = -_currentDirection;
+                _currentStep = 0;
+            }
+        }
+
+        private void StartTranslation()
         {
             Vector3 movement = transform.rotation * _direction;
             movement *= _currentDirection;
@@ -23,14 +40,22 @@ namespace Puzzle
             {
                 movement.Scale(bounds.size);
             }
-            transform.DOLocalMove(transform.localPosition + movement, 0.3f).SetEase(Ease.InBack);
+            _previousPosition = transform.localPosition;
+            _actionInProgress = true;
+            transform.DOLocalMove(transform.localPosition + movement, 0.3f).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
+        }
 
-            _currentStep++;
-            if (_currentStep >= _maxStep)
-            {
-                _currentDirection = -_currentDirection;
-                _currentStep = 0;
-            }
+        private void OnAnimationComplete()
+        {
+            _actionInProgress = false;
+            IncreaseStepAndChangeDirection();
+        }
+
+        protected override void CancelAction()
+        {
+            _actionInProgress = false;
+            transform.DOKill();
+            transform.DOLocalMove(_previousPosition, 0.2f).SetEase(Ease.InBounce);
         }
     }
 }
