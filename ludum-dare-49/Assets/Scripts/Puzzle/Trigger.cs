@@ -40,7 +40,7 @@ namespace Puzzle
             return _mode == Mode.COLLIDE && IsBall(go) && LayerIsValid(go);
         }
 
-        public bool IsBall(GameObject go)
+        public static bool IsBall(GameObject go)
         {
             return go.tag == "Ball" || (go.transform.parent && go.transform.parent.tag == "Ball");
         }

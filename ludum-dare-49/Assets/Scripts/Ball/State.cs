@@ -7,8 +7,9 @@ namespace Ball
 {
     public class State : MonoBehaviour
     {
-        private Vector3 _startPosition;
-        private Quaternion _startRotation;
+        Vector3 _startPosition;
+        Quaternion _startRotation;
+        CollisionDetectionMode _collisionDetectionMode;
 
         Rigidbody _rigidbody;
         public new Rigidbody rigidbody
@@ -23,7 +24,7 @@ namespace Ball
             }
         }
 
-        void Awake()
+        public void RegisterStartInfo()
         {
             _startPosition = transform.position;
             _startRotation = transform.rotation;
@@ -34,10 +35,29 @@ namespace Ball
 
         public void ResetToStart()
         {
-            rigidbody.isKinematic = true;
+            StopPhysics();
             transform.position = _startPosition;
             transform.rotation = _startRotation;
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            rigidbody.ResetCenterOfMass();
+            rigidbody.ResetInertiaTensor();
+            //StartPhysics();
+        }
+
+        public void StopPhysics()
+        {
+            _collisionDetectionMode = rigidbody.collisionDetectionMode;
+            rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            rigidbody.isKinematic = true;
+            rigidbody.Sleep();
+        }
+
+        public void StartPhysics()
+        {
             rigidbody.isKinematic = false;
+            rigidbody.collisionDetectionMode = _collisionDetectionMode;
+            rigidbody.Sleep();
         }
     }
 }

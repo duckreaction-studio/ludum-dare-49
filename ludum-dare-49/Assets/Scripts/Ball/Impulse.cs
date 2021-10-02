@@ -27,7 +27,11 @@ namespace Ball
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Ball impulse");
+            DoImpulse();
+        }
+
+        public void DoImpulse()
+        {
             rigidbody.AddForce(_direction * _force, ForceMode.Impulse);
         }
     }

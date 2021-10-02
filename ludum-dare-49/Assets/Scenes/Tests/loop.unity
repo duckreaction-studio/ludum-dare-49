@@ -384,7 +384,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-50962
+  m_Name: pb_Mesh-73954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -584,6 +584,7 @@ GameObject:
   - component: {fileID: 934332083}
   - component: {fileID: 934332082}
   - component: {fileID: 934332081}
+  - component: {fileID: 934332085}
   m_Layer: 0
   m_Name: End
   m_TagString: End
@@ -599,10 +600,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934332080}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &934332082
 MeshRenderer:
@@ -667,6 +668,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &934332085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934332080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7b6687e3a5775438937a6a2471835d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &975036611
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +691,6 @@ GameObject:
   - component: {fileID: 975036615}
   - component: {fileID: 975036614}
   - component: {fileID: 975036613}
-  - component: {fileID: 975036612}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Spawn
@@ -686,19 +698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &975036612
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975036611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &975036613
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -905,6 +904,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1665167710}
   - component: {fileID: 1665167709}
+  - component: {fileID: 1665167712}
+  - component: {fileID: 1665167711}
   m_Layer: 0
   m_Name: Context
   m_TagString: Untagged
@@ -925,7 +926,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 1665167712}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -957,6 +959,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1665167711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665167708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838e3ee5788084040bb2b05ff17b13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 1
+--- !u!114 &1665167712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665167708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daef911896266164f83ce61010575709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2137646732
 GameObject:
   m_ObjectHideFlags: 0
