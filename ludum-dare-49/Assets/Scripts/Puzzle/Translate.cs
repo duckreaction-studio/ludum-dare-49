@@ -41,21 +41,26 @@ namespace Puzzle
                 movement.Scale(bounds.size);
             }
             _previousPosition = transform.localPosition;
-            _actionInProgress = true;
-            transform.DOLocalMove(transform.localPosition + movement, 0.3f).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
+            _state = State.Action;
+            transform.DOLocalMove(transform.localPosition + movement, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
         }
 
         private void OnAnimationComplete()
         {
-            _actionInProgress = false;
+            _state = State.Idle;
             IncreaseStepAndChangeDirection();
         }
 
         protected override void CancelAction()
         {
-            _actionInProgress = false;
+            _state = State.Cancel;
             transform.DOKill();
-            transform.DOLocalMove(_previousPosition, 0.2f).SetEase(Ease.InBounce);
+            transform.DOLocalMove(_previousPosition, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
+        }
+
+        private void OnCancelAnimationComplete()
+        {
+            _state = State.Idle;
         }
     }
 }

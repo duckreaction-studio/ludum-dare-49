@@ -7,8 +7,14 @@ namespace Puzzle
 {
     public class TriggerReact : MonoBehaviour
     {
+        public enum State { Idle, Action, Cancel };
+
         [SerializeField]
         Trigger[] _triggers;
+        [SerializeField]
+        protected float _animationDuration = 0.3f;
+        [SerializeField]
+        protected float _cancelAnimationDuration = 0.3f;
 
         protected Renderer _renderer;
         public new Renderer renderer
@@ -28,7 +34,7 @@ namespace Puzzle
             get => renderer.bounds;
         }
 
-        protected bool _actionInProgress;
+        protected State _state = State.Idle;
 
         void Start()
         {
@@ -38,7 +44,8 @@ namespace Puzzle
 
         void OnTriggered(object sender, EventArgs e)
         {
-            DoAction();
+            if (_state == State.Idle)
+                DoAction();
         }
 
         protected virtual void DoAction()
@@ -48,7 +55,7 @@ namespace Puzzle
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_actionInProgress && IsBlock(other.gameObject))
+            if (_state == State.Action && IsBlock(other.gameObject))
                 CancelAction();
         }
 

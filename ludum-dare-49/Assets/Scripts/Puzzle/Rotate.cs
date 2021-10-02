@@ -35,21 +35,26 @@ namespace Puzzle
             Quaternion rotation = transform.localRotation;
             rotation *= Quaternion.Euler(_currentDirection * _rotate);
             _previousRotation = transform.localRotation;
-            _actionInProgress = true;
-            transform.DOLocalRotateQuaternion(rotation, 0.3f).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
+            _state = State.Action;
+            transform.DOLocalRotateQuaternion(rotation, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
         }
 
         private void OnAnimationComplete()
         {
-            _actionInProgress = false;
+            _state = State.Idle;
             IncreaseStepAndChangeDirection();
         }
 
         protected override void CancelAction()
         {
-            _actionInProgress = false;
+            _state = State.Cancel;
             transform.DOKill();
-            transform.DOLocalRotateQuaternion(_previousRotation, 0.2f).SetEase(Ease.InBounce);
+            transform.DOLocalRotateQuaternion(_previousRotation, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
+        }
+
+        private void OnCancelAnimationComplete()
+        {
+            _state = State.Idle;
         }
     }
 }
