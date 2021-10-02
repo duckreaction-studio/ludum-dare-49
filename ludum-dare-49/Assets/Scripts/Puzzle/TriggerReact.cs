@@ -8,7 +8,7 @@ namespace Puzzle
     public class TriggerReact : MonoBehaviour
     {
         [SerializeField]
-        Trigger _trigger;
+        Trigger[] _triggers;
 
         protected Renderer _renderer;
         public new Renderer renderer
@@ -30,7 +30,8 @@ namespace Puzzle
 
         void Start()
         {
-            _trigger.triggered += OnTriggered;
+            foreach (var trigger in _triggers)
+                trigger.triggered += OnTriggered;
         }
 
         void OnTriggered(object sender, EventArgs e)
@@ -45,8 +46,9 @@ namespace Puzzle
 
         void OnDestroy()
         {
-            if (_trigger)
-                _trigger.triggered -= OnTriggered;
+            foreach (var trigger in _triggers)
+                if (trigger)
+                    trigger.triggered -= OnTriggered;
         }
     }
 }

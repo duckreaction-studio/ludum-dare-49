@@ -17,7 +17,8 @@ namespace Puzzle
 
         protected override void DoAction()
         {
-            Vector3 movement = _currentDirection * _direction;
+            Vector3 movement = transform.rotation * _direction;
+            movement *= _currentDirection;
             if (_relative)
             {
                 movement.Scale(bounds.size);
