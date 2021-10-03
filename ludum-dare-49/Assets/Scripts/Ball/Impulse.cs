@@ -29,7 +29,18 @@ namespace Ball
             }
         }
 
+        public void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.Space))
+                UserThrowBall();
+        }
+
         public void OnPointerClick(PointerEventData eventData)
+        {
+            UserThrowBall();
+        }
+
+        private void UserThrowBall()
         {
             _levelState?.PlayerThrowBall();
             DoImpulse();
