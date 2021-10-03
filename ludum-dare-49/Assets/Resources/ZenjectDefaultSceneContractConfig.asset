@@ -17,3 +17,7 @@ MonoBehaviour:
     Scene: {fileID: 102900000, guid: 0167b684141480c4e919fb4d70ae8647, type: 3}
   - ContractName: MainMenu
     Scene: {fileID: 102900000, guid: d2e9b3dfc013d5a488e6c52bb5ff3813, type: 3}
+  - ContractName: Level
+    Scene: {fileID: 102900000, guid: 28a617bf144ff0d449717d307e0fa31e, type: 3}
+  - ContractName: LevelUI
+    Scene: {fileID: 102900000, guid: 4b0215e551e598f448af2954e032adbe, type: 3}

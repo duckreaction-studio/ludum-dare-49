@@ -17,6 +17,7 @@ public class LevelState : MonoBehaviour
     public event EventHandler ballStartMoving;
     public event EventHandler prepareReplay;
     public event EventHandler startReplay;
+    public event EventHandler reset;
 
     [SerializeField]
     public float firstAnimationDuration = 2f;
@@ -46,6 +47,18 @@ public class LevelState : MonoBehaviour
         _ballState.RegisterStartInfo();
         _ballState.gameObject.SetActive(true);
         StartBall();
+    }
+
+    public void RestartLevel()
+    {
+        currentState = State.UserPlaying;
+        StartBall();
+    }
+
+    public void ResetLevel()
+    {
+        RestartLevel();
+        reset?.Invoke(this, null);
     }
 
     public void PlayerThrowBall()

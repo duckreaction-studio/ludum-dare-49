@@ -14,6 +14,7 @@ namespace Puzzle
         protected override void Start()
         {
             _data.position = transform.localPosition;
+            _initialData = _data;
             base.Start();
         }
 

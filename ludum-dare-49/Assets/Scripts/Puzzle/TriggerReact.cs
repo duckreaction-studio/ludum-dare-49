@@ -70,6 +70,7 @@ namespace Puzzle
 
         protected State _state = State.Idle;
         protected Data _data = new Data(1);
+        protected Data _initialData = new Data(1);
         protected List<TimeData> _timeDataList;
         protected float _startTime;
         protected float _actionTime;
@@ -85,17 +86,23 @@ namespace Puzzle
 
             if (_levelState)
             {
-                _levelState.ballStartMoving += RecordInitialData;
+                _levelState.ballStartMoving += OnBallStartMoving;
                 _levelState.prepareReplay += PrepareReplay;
                 _levelState.startReplay += StartReplay;
+                _levelState.reset += ResetToInitialState;
             }
         }
 
-        private void RecordInitialData(object sender, EventArgs e)
+        private void OnBallStartMoving(object sender, EventArgs e)
         {
             _timeDataList = new List<TimeData>();
             _startTime = Time.realtimeSinceStartup;
             _timeDataList.Add(new TimeData(0, _data));
+        }
+
+        private void ResetToInitialState(object sender, EventArgs e)
+        {
+            Replay(_initialData);
         }
 
         private void PrepareReplay(object sender, EventArgs e)

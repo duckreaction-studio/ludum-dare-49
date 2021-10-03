@@ -12,6 +12,7 @@ namespace Puzzle
         protected override void Start()
         {
             _data.rotation = transform.localRotation;
+            _initialData = _data;
             base.Start();
         }
 
