@@ -73,6 +73,7 @@ namespace Puzzle
         protected List<TimeData> _timeDataList;
         protected float _startTime;
         protected float _actionTime;
+        protected Trigger.InputType _inputType;
         protected int _dataIndex = 0;
 
         #endregion
@@ -118,8 +119,9 @@ namespace Puzzle
             }
         }
 
-        void OnTriggered(object sender, EventArgs e)
+        void OnTriggered(object sender, Trigger.InputType inputType)
         {
+            _inputType = inputType;
             if (_state == State.Idle)
                 DoAction();
         }
@@ -133,7 +135,7 @@ namespace Puzzle
         {
             _state = State.Idle;
             IncreaseStepAndChangeDirection();
-            if (_levelState?.currentState == LevelState.State.BallMoving)
+            if (_inputType == Trigger.InputType.User && _levelState?.currentState == LevelState.State.BallMoving)
                 RecordData();
         }
 

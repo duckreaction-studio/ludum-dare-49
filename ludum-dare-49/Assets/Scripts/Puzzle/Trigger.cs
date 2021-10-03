@@ -6,24 +6,25 @@ namespace Puzzle
 {
     public class Trigger : MonoBehaviour, IPointerClickHandler
     {
-        public enum Mode { CLICK, COLLIDE }
+        public enum Mode { Click, Collide }
+        public enum InputType { User, Other }
 
         [SerializeField]
-        Mode _mode = Mode.CLICK;
+        Mode _mode = Mode.Click;
 
-        public event EventHandler triggered;
+        public event EventHandler<InputType> triggered;
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (_mode == Mode.CLICK)
-                triggered?.Invoke(this, null);
+            if (_mode == Mode.Click)
+                triggered?.Invoke(this, InputType.User);
 
         }
 
         public void OnCollisionEnter(Collision collision)
         {
             if (CollisionIsValid(collision.gameObject))
-                triggered?.Invoke(this, null);
+                triggered?.Invoke(this, InputType.Other);
         }
 
         public void OnTriggerEnter(Collider other)
@@ -31,13 +32,13 @@ namespace Puzzle
             if (CollisionIsValid(other.gameObject))
             {
                 Debug.Log(other);
-                triggered?.Invoke(this, null);
+                triggered?.Invoke(this, InputType.Other);
             }
         }
 
         public bool CollisionIsValid(GameObject go)
         {
-            return _mode == Mode.COLLIDE && IsBall(go) && LayerIsValid(go);
+            return _mode == Mode.Collide && IsBall(go) && LayerIsValid(go);
         }
 
         public static bool IsBall(GameObject go)
