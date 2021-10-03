@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,19 @@ namespace Ball
             }
         }
 
+        Impulse _ballImpulse;
+        public Impulse ballImpulse
+        {
+            get
+            {
+                if (_ballImpulse == null)
+                {
+                    _ballImpulse = GetComponent<Impulse>();
+                }
+                return _ballImpulse;
+            }
+        }
+
         public void RegisterStartInfo()
         {
             _startPosition = transform.position;
@@ -42,7 +56,12 @@ namespace Ball
             rigidbody.angularVelocity = Vector3.zero;
             rigidbody.ResetCenterOfMass();
             rigidbody.ResetInertiaTensor();
-            //StartPhysics();
+        }
+
+        public void DoImpulse()
+        {
+            StartPhysics();
+            ballImpulse.DoImpulse();
         }
 
         public void StopPhysics()
