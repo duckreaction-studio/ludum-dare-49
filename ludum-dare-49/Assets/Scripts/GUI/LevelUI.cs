@@ -58,6 +58,18 @@ namespace GUI
             }
         }
 
+        public void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+        Screen.fullScreen = false;
+    Application.OpenURL("about:blank");
+#else
+        Application.Quit();
+#endif
+        }
+
         private void SetAnchorY(RectTransform rect, float targetY)
         {
             var pos = rect.anchoredPosition;
