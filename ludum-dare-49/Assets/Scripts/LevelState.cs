@@ -44,6 +44,7 @@ public class LevelState : MonoBehaviour
         _ballState.StopPhysics();
         _ballState.transform.position = _spawn.position;
         _ballState.RegisterStartInfo();
+        _ballState.gameObject.SetActive(true);
         StartBall();
     }
 
