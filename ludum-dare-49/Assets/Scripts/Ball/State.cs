@@ -13,7 +13,7 @@ namespace Ball
         CollisionDetectionMode _collisionDetectionMode;
 
         Rigidbody _rigidbody;
-        public new Rigidbody rigidbody
+        public Rigidbody rigidbody
         {
             get
             {

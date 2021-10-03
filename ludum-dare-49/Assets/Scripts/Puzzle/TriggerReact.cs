@@ -51,7 +51,7 @@ namespace Puzzle
         protected LevelState _levelState;
 
         protected Renderer _renderer;
-        public new Renderer renderer
+        public Renderer renderer
         {
             get
             {

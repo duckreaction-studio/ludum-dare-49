@@ -17,7 +17,7 @@ namespace Ball
         LevelState _levelState;
 
         Rigidbody _rigidbody;
-        public new Rigidbody rigidbody
+        public Rigidbody rigidbody
         {
             get
             {
