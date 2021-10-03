@@ -9,6 +9,12 @@ namespace Puzzle
         [SerializeField]
         Vector3 _rotate = new Vector3(0f, 90f, 0f);
 
+        protected override void Start()
+        {
+            _data.rotation = transform.localRotation;
+            base.Start();
+        }
+
         protected override void DoAction()
         {
             base.DoAction();
@@ -29,6 +35,25 @@ namespace Puzzle
             _state = State.Cancel;
             transform.DOKill();
             transform.DOLocalRotateQuaternion(_data.rotation, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
+        }
+
+        protected override void OnAnimationComplete()
+        {
+            _data.rotation = transform.localRotation;
+            base.OnAnimationComplete();
+        }
+
+        protected override void Replay(Data data)
+        {
+            transform.DOLocalRotateQuaternion(data.rotation, _animationDuration).SetEase(Ease.InBack).onComplete = () =>
+            {
+                OnReplayComplete(data);
+            };
+        }
+
+        private void OnReplayComplete(Data data)
+        {
+            _data = data;
         }
     }
 }
