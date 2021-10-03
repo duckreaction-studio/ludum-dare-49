@@ -11,6 +11,7 @@ namespace Puzzle
 
         protected override void DoAction()
         {
+            base.DoAction();
             StartRotation();
         }
 
@@ -23,22 +24,11 @@ namespace Puzzle
             transform.DOLocalRotateQuaternion(rotation, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
         }
 
-        private void OnAnimationComplete()
-        {
-            _state = State.Idle;
-            IncreaseStepAndChangeDirection();
-        }
-
         protected override void CancelAction()
         {
             _state = State.Cancel;
             transform.DOKill();
             transform.DOLocalRotateQuaternion(_data.rotation, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
-        }
-
-        private void OnCancelAnimationComplete()
-        {
-            _state = State.Idle;
         }
     }
 }

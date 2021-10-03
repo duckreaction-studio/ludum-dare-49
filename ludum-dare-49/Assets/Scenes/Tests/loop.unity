@@ -455,7 +455,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 407700846, guid: 1bc9cd64adc20eb408f3c79f164e58ac, type: 3}
       propertyPath: _force
-      value: 4.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 407700846, guid: 1bc9cd64adc20eb408f3c79f164e58ac, type: 3}
       propertyPath: _direction.x
@@ -548,7 +548,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1380
+  m_Name: pb_Mesh-32546
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1231,9 +1231,9 @@ MonoBehaviour:
   - {fileID: 1838860430}
   _animationDuration: 0.3
   _cancelAnimationDuration: 0.3
+  _maxStep: 1
   _direction: {x: 0, y: 2, z: 0}
   _relative: 1
-  _maxStep: 1
 --- !u!65 &1838860432
 BoxCollider:
   m_ObjectHideFlags: 0

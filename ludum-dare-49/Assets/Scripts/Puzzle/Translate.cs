@@ -11,8 +11,15 @@ namespace Puzzle
         [SerializeField]
         bool _relative = true;
 
+        protected override void Start()
+        {
+            _data.position = transform.localPosition;
+            base.Start();
+        }
+
         protected override void DoAction()
         {
+            base.DoAction();
             StartTranslation();
         }
 
@@ -29,12 +36,6 @@ namespace Puzzle
             transform.DOLocalMove(transform.localPosition + movement, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
         }
 
-        private void OnAnimationComplete()
-        {
-            _state = State.Idle;
-            IncreaseStepAndChangeDirection();
-        }
-
         protected override void CancelAction()
         {
             _state = State.Cancel;
@@ -42,9 +43,23 @@ namespace Puzzle
             transform.DOLocalMove(_data.position, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
         }
 
-        private void OnCancelAnimationComplete()
+        protected override void OnAnimationComplete()
         {
-            _state = State.Idle;
+            _data.position = transform.localPosition;
+            base.OnAnimationComplete();
+        }
+
+        protected override void Replay(Data data)
+        {
+            transform.DOLocalMove(data.position, _animationDuration).SetEase(Ease.InBack).onComplete = () =>
+            {
+                OnReplayComplete(data);
+            };
+        }
+
+        private void OnReplayComplete(Data data)
+        {
+            _data = data;
         }
     }
 }

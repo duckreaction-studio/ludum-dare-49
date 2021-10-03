@@ -14,8 +14,9 @@ public class LevelState : MonoBehaviour
         get; private set;
     } = State.UserPlaying;
 
-    event EventHandler ballStartMoving;
-    event EventHandler startReplay;
+    public event EventHandler ballStartMoving;
+    public event EventHandler prepareReplay;
+    public event EventHandler startReplay;
 
     [SerializeField]
     public float firstAnimationDuration = 2f;
@@ -32,6 +33,7 @@ public class LevelState : MonoBehaviour
     {
         currentState = State.Replay;
         StartBall();
+        prepareReplay?.Invoke(this, null);
     }
 
     [Inject]
@@ -48,7 +50,7 @@ public class LevelState : MonoBehaviour
     public void PlayerThrowBall()
     {
         currentState = State.BallMoving;
-
+        ballStartMoving?.Invoke(this, null);
     }
 
     private void StartBall()
@@ -65,6 +67,7 @@ public class LevelState : MonoBehaviour
         {
             _ballState.transform.DOMove(_startPoint.position, animationDuration).SetEase(Ease.InCubic).onComplete = () =>
             {
+                startReplay?.Invoke(this, null);
                 _ballState.DoImpulse();
             };
         }

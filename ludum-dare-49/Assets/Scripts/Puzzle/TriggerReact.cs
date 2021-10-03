@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Puzzle
 {
     public class TriggerReact : MonoBehaviour
     {
+        #region "data"
         public enum State { Idle, Action, Cancel };
 
         public struct Data
@@ -29,6 +31,11 @@ namespace Puzzle
         {
             public float time;
             public Data data;
+            public TimeData(float time, Data data)
+            {
+                this.time = time;
+                this.data = data;
+            }
         }
 
         [SerializeField]
@@ -39,6 +46,9 @@ namespace Puzzle
         protected float _cancelAnimationDuration = 0.3f;
         [SerializeField]
         int _maxStep = 1;
+
+        [Inject(Optional = true)]
+        protected LevelState _levelState;
 
         protected Renderer _renderer;
         public new Renderer renderer
@@ -61,11 +71,51 @@ namespace Puzzle
         protected State _state = State.Idle;
         protected Data _data = new Data(1);
         protected List<TimeData> _timeDataList;
+        protected float _startTime;
+        protected float _actionTime;
+        protected int _dataIndex = 0;
 
-        void Start()
+        #endregion
+
+        protected virtual void Start()
         {
             foreach (var trigger in _triggers)
                 trigger.triggered += OnTriggered;
+
+            if (_levelState)
+            {
+                _levelState.ballStartMoving += RecordInitialData;
+                _levelState.prepareReplay += PrepareReplay;
+                _levelState.startReplay += StartReplay;
+            }
+        }
+
+        private void RecordInitialData(object sender, EventArgs e)
+        {
+            _timeDataList = new List<TimeData>();
+            _startTime = Time.realtimeSinceStartup;
+            _timeDataList.Add(new TimeData(0, _data));
+        }
+
+        private void PrepareReplay(object sender, EventArgs e)
+        {
+            _dataIndex = 0;
+            Replay(_timeDataList[_dataIndex].data);
+        }
+
+        private void StartReplay(object sender, EventArgs e)
+        {
+            StartCoroutine(ReplayCoroutine());
+        }
+
+        private IEnumerator ReplayCoroutine()
+        {
+            for (++_dataIndex; _dataIndex < _timeDataList.Count; ++_dataIndex)
+            {
+                var current = _timeDataList[_dataIndex];
+                yield return new WaitForSeconds(current.time);
+                Replay(current.data);
+            }
         }
 
         void OnTriggered(object sender, EventArgs e)
@@ -76,7 +126,20 @@ namespace Puzzle
 
         protected virtual void DoAction()
         {
-            throw new NotImplementedException();
+            _actionTime = Time.realtimeSinceStartup - _startTime;
+        }
+
+        protected virtual void OnAnimationComplete()
+        {
+            _state = State.Idle;
+            IncreaseStepAndChangeDirection();
+            if (_levelState?.currentState == LevelState.State.BallMoving)
+                RecordData();
+        }
+
+        protected virtual void OnCancelAnimationComplete()
+        {
+            _state = State.Idle;
         }
 
         protected virtual void IncreaseStepAndChangeDirection()
@@ -89,6 +152,11 @@ namespace Puzzle
             }
         }
 
+        protected virtual void RecordData()
+        {
+            _timeDataList.Add(new TimeData(_actionTime, _data));
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (_state == State.Action && IsBlock(other.gameObject))
@@ -96,6 +164,11 @@ namespace Puzzle
         }
 
         protected virtual void CancelAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual void Replay(Data data)
         {
             throw new NotImplementedException();
         }
