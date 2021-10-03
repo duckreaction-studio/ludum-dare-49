@@ -90,7 +90,7 @@ public class SceneService : MonoBehaviour
     {
         Color color = _color;
         color.a = 0;
-        _imageEffect.DOColor(color, _transitionDuration).SetEase(Ease.OutCubic).onComplete += OnTransitionComplete;
+        _imageEffect.DOColor(color, _transitionDuration).SetEase(Ease.InCubic).onComplete += OnTransitionComplete;
     }
 
     private void OnTransitionComplete()
