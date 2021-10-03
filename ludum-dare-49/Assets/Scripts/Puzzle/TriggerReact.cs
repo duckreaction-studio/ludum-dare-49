@@ -9,12 +9,36 @@ namespace Puzzle
     {
         public enum State { Idle, Action, Cancel };
 
+        public struct Data
+        {
+            public int direction;
+            public int step;
+            public Vector3 position;
+            public Quaternion rotation;
+
+            public Data(int direction)
+            {
+                this.direction = direction;
+                step = 0;
+                position = new Vector3();
+                rotation = new Quaternion();
+            }
+        }
+
+        public struct TimeData
+        {
+            public float time;
+            public Data data;
+        }
+
         [SerializeField]
         Trigger[] _triggers;
         [SerializeField]
         protected float _animationDuration = 0.3f;
         [SerializeField]
         protected float _cancelAnimationDuration = 0.3f;
+        [SerializeField]
+        int _maxStep = 1;
 
         protected Renderer _renderer;
         public new Renderer renderer
@@ -35,6 +59,8 @@ namespace Puzzle
         }
 
         protected State _state = State.Idle;
+        protected Data _data = new Data(1);
+        protected List<TimeData> _timeDataList;
 
         void Start()
         {
@@ -51,6 +77,16 @@ namespace Puzzle
         protected virtual void DoAction()
         {
             throw new NotImplementedException();
+        }
+
+        protected virtual void IncreaseStepAndChangeDirection()
+        {
+            _data.step++;
+            if (_data.step >= _maxStep)
+            {
+                _data.direction = -_data.direction;
+                _data.step = 0;
+            }
         }
 
         private void OnTriggerEnter(Collider other)

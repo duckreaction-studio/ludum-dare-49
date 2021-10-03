@@ -10,37 +10,21 @@ namespace Puzzle
         Vector3 _direction = Vector3.forward;
         [SerializeField]
         bool _relative = true;
-        [SerializeField]
-        int _maxStep = 1;
-
-        int _currentDirection = 1;
-        int _currentStep = 0;
-        Vector3 _previousPosition;
 
         protected override void DoAction()
         {
             StartTranslation();
         }
 
-        private void IncreaseStepAndChangeDirection()
-        {
-            _currentStep++;
-            if (_currentStep >= _maxStep)
-            {
-                _currentDirection = -_currentDirection;
-                _currentStep = 0;
-            }
-        }
-
         private void StartTranslation()
         {
             Vector3 movement = transform.rotation * _direction;
-            movement *= _currentDirection;
+            movement *= _data.direction;
             if (_relative)
             {
                 movement.Scale(bounds.size);
             }
-            _previousPosition = transform.localPosition;
+            _data.position = transform.localPosition;
             _state = State.Action;
             transform.DOLocalMove(transform.localPosition + movement, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
         }
@@ -55,7 +39,7 @@ namespace Puzzle
         {
             _state = State.Cancel;
             transform.DOKill();
-            transform.DOLocalMove(_previousPosition, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
+            transform.DOLocalMove(_data.position, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
         }
 
         private void OnCancelAnimationComplete()
