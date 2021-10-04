@@ -10,7 +10,7 @@ namespace Ball
         float _velocityMaxVolume = 5f;
 
         Rigidbody _rigidbody;
-        public new Rigidbody rigidbody
+        public Rigidbody rigidbody
         {
             get
             {

@@ -8,53 +8,53 @@ namespace Puzzle
     {
         [SerializeField]
         Vector3 _rotate = new Vector3(0f, 90f, 0f);
-        [SerializeField]
-        int _maxStep = 1;
 
-        int _currentDirection = 1;
-        int _currentStep = 0;
-        Quaternion _previousRotation;
+        protected override void Start()
+        {
+            _data.rotation = transform.localRotation;
+            _initialData = _data;
+            base.Start();
+        }
 
         protected override void DoAction()
         {
+            base.DoAction();
             StartRotation();
-        }
-
-        private void IncreaseStepAndChangeDirection()
-        {
-            _currentStep++;
-            if (_currentStep >= _maxStep)
-            {
-                _currentDirection = -_currentDirection;
-                _currentStep = 0;
-            }
         }
 
         private void StartRotation()
         {
             Quaternion rotation = transform.localRotation;
-            rotation *= Quaternion.Euler(_currentDirection * _rotate);
-            _previousRotation = transform.localRotation;
+            rotation *= Quaternion.Euler(_data.direction * _rotate);
+            _data.rotation = transform.localRotation;
             _state = State.Action;
             transform.DOLocalRotateQuaternion(rotation, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
-        }
-
-        private void OnAnimationComplete()
-        {
-            _state = State.Idle;
-            IncreaseStepAndChangeDirection();
         }
 
         protected override void CancelAction()
         {
             _state = State.Cancel;
             transform.DOKill();
-            transform.DOLocalRotateQuaternion(_previousRotation, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
+            transform.DOLocalRotateQuaternion(_data.rotation, _cancelAnimationDuration).SetEase(Ease.InBounce).onComplete = OnCancelAnimationComplete;
         }
 
-        private void OnCancelAnimationComplete()
+        protected override void OnAnimationComplete()
         {
-            _state = State.Idle;
+            _data.rotation = transform.localRotation;
+            base.OnAnimationComplete();
+        }
+
+        protected override void Replay(Data data)
+        {
+            transform.DOLocalRotateQuaternion(data.rotation, _animationDuration).SetEase(Ease.InBack).onComplete = () =>
+            {
+                OnReplayComplete(data);
+            };
+        }
+
+        private void OnReplayComplete(Data data)
+        {
+            _data = data;
         }
     }
 }

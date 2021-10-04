@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Ball
 {
@@ -12,8 +13,11 @@ namespace Ball
         [SerializeField]
         Vector3 _direction = Vector3.right;
 
+        [Inject(Optional = true)]
+        LevelState _levelState;
+
         Rigidbody _rigidbody;
-        public new Rigidbody rigidbody
+        public Rigidbody rigidbody
         {
             get
             {
@@ -25,9 +29,25 @@ namespace Ball
             }
         }
 
+        public void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.Space))
+                UserThrowBall();
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Ball impulse");
+            UserThrowBall();
+        }
+
+        private void UserThrowBall()
+        {
+            _levelState?.PlayerThrowBall();
+            DoImpulse();
+        }
+
+        public void DoImpulse()
+        {
             rigidbody.AddForce(_direction * _force, ForceMode.Impulse);
         }
     }
