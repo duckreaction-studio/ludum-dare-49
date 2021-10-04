@@ -36,6 +36,7 @@ namespace Audio
                 info.source = gameObject.AddComponent<AudioSource>();
                 info.source.clip = info.clip;
                 info.source.volume = 0f;
+                info.source.loop = true;
                 info.source.Play();
                 if (info.playOnStart)
                     StartPlaying(info);
