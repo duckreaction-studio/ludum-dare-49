@@ -2,6 +2,7 @@ using DG.Tweening;
 using DuckReaction.Common;
 using DuckReaction.Common.Container;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,8 @@ public class SceneService : MonoBehaviour
 
     List<string> _scenesToUnload;
     List<string> _scenesToLoad;
+
+    public event EventHandler<string> sceneLoad;
 
     void Start()
     {
@@ -76,6 +79,7 @@ public class SceneService : MonoBehaviour
     private void LoadNextScene()
     {
         var scene = _scenesToLoad.Shift();
+        sceneLoad?.Invoke(this, scene);
         SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += OnSceneLoadedOrUnloaded;
     }
 
