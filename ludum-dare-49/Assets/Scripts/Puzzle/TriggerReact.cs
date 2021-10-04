@@ -1,3 +1,4 @@
+using DuckReaction.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,8 @@ namespace Puzzle
 
         [Inject(Optional = true)]
         protected LevelState _levelState;
+        [Inject(Optional = true)]
+        protected SignalBus _signalBus;
 
         protected Renderer _renderer;
         public Renderer renderer
@@ -136,6 +139,8 @@ namespace Puzzle
         protected virtual void DoAction()
         {
             _actionTime = Time.realtimeSinceStartup - _startTime;
+            if (_signalBus != null)
+                _signalBus.Fire(new GameEvent(GameEventType.TriggerReactDoAction));
         }
 
         protected virtual void OnAnimationComplete()
@@ -179,7 +184,8 @@ namespace Puzzle
 
         protected virtual void Replay(Data data)
         {
-            throw new NotImplementedException();
+            if (_signalBus != null)
+                _signalBus.Fire(new GameEvent(GameEventType.TriggerReactDoReplay));
         }
 
         private bool IsBlock(GameObject gameObject)

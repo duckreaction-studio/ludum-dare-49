@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,11 @@ namespace Ball
     {
         [SerializeField]
         float _velocityMaxVolume = 5f;
+        [SerializeField]
+        [MinMaxSlider(-5, 5, true)]
+        public Vector2 _minMaxPitch = new Vector2(-1, 1);
+        [SerializeField]
+        public float _velocityMaxPich = 5f;
 
         Rigidbody _rigidbody;
         public Rigidbody rigidbody
@@ -37,7 +43,9 @@ namespace Ball
 
         public void Update()
         {
-            audioSource.volume = Mathf.Lerp(0, 1, rigidbody.velocity.magnitude / _velocityMaxVolume);
+            var speed = rigidbody.velocity.magnitude;
+            audioSource.volume = Mathf.Lerp(0, 1, speed / _velocityMaxVolume);
+            audioSource.pitch = Mathf.Lerp(_minMaxPitch.x, _minMaxPitch.y, speed / _velocityMaxPich);
         }
     }
 }

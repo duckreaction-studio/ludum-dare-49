@@ -46,6 +46,7 @@ namespace Puzzle
 
         protected override void Replay(Data data)
         {
+            base.Replay(data);
             transform.DOLocalRotateQuaternion(data.rotation, _animationDuration).SetEase(Ease.InBack).onComplete = () =>
             {
                 OnReplayComplete(data);

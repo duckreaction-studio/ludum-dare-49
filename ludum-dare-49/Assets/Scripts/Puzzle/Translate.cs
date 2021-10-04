@@ -52,6 +52,7 @@ namespace Puzzle
 
         protected override void Replay(Data data)
         {
+            base.Replay(data);
             transform.DOLocalMove(data.position, _animationDuration).SetEase(Ease.InBack).onComplete = () =>
             {
                 OnReplayComplete(data);
