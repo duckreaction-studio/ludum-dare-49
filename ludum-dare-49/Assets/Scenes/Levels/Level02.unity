@@ -3917,7 +3917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 407700846, guid: 1bc9cd64adc20eb408f3c79f164e58ac, type: 3}
       propertyPath: _force
-      value: 4.2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 407700846, guid: 1bc9cd64adc20eb408f3c79f164e58ac, type: 3}
       propertyPath: _direction.x
