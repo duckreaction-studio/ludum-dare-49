@@ -515,4 +515,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeIn: 2
-  _infos: []
+  _infos:
+  - clip: {fileID: 8300000, guid: b9f8302424cc6e5448137960284a07a7, type: 3}
+    playOnStart: 1
+    levelName: 
+    volume: 0.4
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8633e86d07546c54d84e6f1853fd2ba2, type: 3}
+    playOnStart: 0
+    levelName: Level01
+    volume: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 5d97574e6f6aafa44a3e31d4f388d572, type: 3}
+    playOnStart: 0
+    levelName: Level04
+    volume: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 7e5a50e6fa2551940a86a6b35d22001a, type: 3}
+    playOnStart: 0
+    levelName: Level07
+    volume: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1078fc3743314b444b5e0aa3453819c6, type: 3}
+    playOnStart: 0
+    levelName: Level09
+    volume: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 35b913b3831850f429f4b2963b8e8e8f, type: 3}
+    playOnStart: 0
+    levelName: Level12
+    volume: 1
+    source: {fileID: 0}
