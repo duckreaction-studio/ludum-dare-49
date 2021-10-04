@@ -28,7 +28,7 @@ namespace Puzzle
             rotation *= Quaternion.Euler(_data.direction * _rotate);
             _data.rotation = transform.localRotation;
             _state = State.Action;
-            transform.DOLocalRotateQuaternion(rotation, _animationDuration).SetEase(Ease.InBack).onComplete = OnAnimationComplete;
+            transform.DOLocalRotateQuaternion(rotation, _animationDuration).SetEase(Ease.InOutCubic).onComplete = OnAnimationComplete;
         }
 
         protected override void CancelAction()

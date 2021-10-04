@@ -8,5 +8,6 @@ public enum GameEventType
     TriggerReactDoReplay,
     Win,
     Restart,
-    Reset
+    Reset,
+    PlayerThrowBall
 }

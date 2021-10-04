@@ -62,6 +62,7 @@ public class LevelState : MonoBehaviour
 
     public void PlayerThrowBall()
     {
+        _signalBus.Fire(new GameEvent(GameEventType.PlayerThrowBall));
         currentState = State.BallMoving;
         ballStartMoving?.Invoke(this, null);
     }
