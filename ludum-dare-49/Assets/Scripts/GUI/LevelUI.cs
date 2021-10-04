@@ -74,7 +74,7 @@ namespace GUI
         {
             for (var i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
             {
-                if (SceneUtility.GetScenePathByBuildIndex(i) == name)
+                if (SceneUtility.GetScenePathByBuildIndex(i).Contains(name))
                     return true;
             }
             return false;

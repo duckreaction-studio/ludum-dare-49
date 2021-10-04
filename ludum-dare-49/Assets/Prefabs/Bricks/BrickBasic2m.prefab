@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1920950522877959755}
   - component: {fileID: 8115139910552702740}
   - component: {fileID: 6391350589855322111}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BrickBasic2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,9 +67,9 @@ MonoBehaviour:
   _triggers: []
   _animationDuration: 0.2
   _cancelAnimationDuration: 0.2
+  _maxStep: 1
   _direction: {x: 0, y: 0, z: 1}
   _relative: 1
-  _maxStep: 1
 --- !u!114 &1047700424001009662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +85,8 @@ MonoBehaviour:
   _triggers: []
   _animationDuration: 0.3
   _cancelAnimationDuration: 0.3
-  _rotate: {x: 0, y: 90, z: 0}
   _maxStep: 1
+  _rotate: {x: 0, y: 90, z: 0}
 --- !u!114 &1047700424001009652
 MonoBehaviour:
   m_ObjectHideFlags: 0
