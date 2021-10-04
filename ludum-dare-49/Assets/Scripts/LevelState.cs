@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DuckReaction.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,15 +31,11 @@ public class LevelState : MonoBehaviour
     [Inject(Id = "StartPoint")]
     Transform _startPoint;
 
-    public void BallReachTheEnd()
-    {
-        currentState = State.Replay;
-        StartBall();
-        prepareReplay?.Invoke(this, null);
-    }
-
     [Inject]
     Ball.State _ballState;
+
+    [Inject]
+    SignalBus _signalBus;
 
     public void Start()
     {
@@ -51,12 +48,14 @@ public class LevelState : MonoBehaviour
 
     public void RestartLevel()
     {
+        _signalBus.Fire(new GameEvent(GameEventType.Restart));
         currentState = State.UserPlaying;
         StartBall();
     }
 
     public void ResetLevel()
     {
+        _signalBus.Fire(new GameEvent(GameEventType.Reset));
         RestartLevel();
         reset?.Invoke(this, null);
     }
@@ -65,6 +64,14 @@ public class LevelState : MonoBehaviour
     {
         currentState = State.BallMoving;
         ballStartMoving?.Invoke(this, null);
+    }
+
+    public void BallReachTheEnd()
+    {
+        _signalBus.Fire(new GameEvent(GameEventType.Win));
+        currentState = State.Replay;
+        StartBall();
+        prepareReplay?.Invoke(this, null);
     }
 
     private void StartBall()

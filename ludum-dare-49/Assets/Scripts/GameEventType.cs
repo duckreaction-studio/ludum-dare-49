@@ -5,5 +5,8 @@ using UnityEngine;
 public enum GameEventType
 {
     TriggerReactDoAction,
-    TriggerReactDoReplay
+    TriggerReactDoReplay,
+    Win,
+    Restart,
+    Reset
 }
