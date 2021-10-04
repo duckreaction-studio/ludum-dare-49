@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.6
+  m_AmbientIntensity: 0.3
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d5b7b38a9c707d74f85a1af4dfe8017e, type: 2}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 649032471}
-  m_IndirectSpecularColor: {r: 0.6874195, g: 0.32060513, b: 0.54584515, a: 1}
+  m_IndirectSpecularColor: {r: 0.6874197, g: 0.3206052, b: 0.54584527, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1561,10 +1561,125 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3269931778983162401, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.2103672
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931778983162401, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 4.47e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931778983162401, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.4033e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931778983162401, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 4.46e-43
+      objectReference: {fileID: 0}
     - target: {fileID: 3269931779001433388, guid: 39d4e0e7e9c1c124c82218861afbd0da,
         type: 3}
       propertyPath: m_Intensity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779001433388, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 8.1e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779001433388, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[1].y
+      value: -0.52631503
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[1].z
+      value: 0.2135886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[2].x
+      value: -1.8269925
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[2].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[3].x
+      value: -1.8269925
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[3].z
+      value: 0.2135886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[4].x
+      value: 3.5086064
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[5].x
+      value: 3.5086064
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[5].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[5].z
+      value: 0.2135886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[6].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[7].z
+      value: 0.2135886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[8].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886739, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_SourcePositions.Array.data[9].z
+      value: 0.2135886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886740, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269931779260886740, guid: 39d4e0e7e9c1c124c82218861afbd0da,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.227
       objectReference: {fileID: 0}
     - target: {fileID: 6703448570199923417, guid: 39d4e0e7e9c1c124c82218861afbd0da,
         type: 3}
@@ -2222,7 +2337,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3392
+  m_Name: pb_Mesh-427664
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4696,7 +4811,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3486
+  m_Name: pb_Mesh-427690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5475,6 +5590,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 847121456}
+    - target: {fileID: 8956309503811926475, guid: d0ec18969d6648841beb3df531f4d596,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.3510647e-38
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0ec18969d6648841beb3df531f4d596, type: 3}
 --- !u!1001 &1586824474332580270
